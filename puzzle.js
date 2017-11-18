@@ -20,23 +20,22 @@ var puzzle = function () {
     {
         if (pos.x > 0 && field [pos.y][pos.x-1] == null)
         {
-            return { x: pos.x-1, y: pos.y };
+            return { x: pos.x-1, y: pos.y, direction: "left" };
         }
         if (pos.x+1 < field[pos.y].length && field [pos.y][pos.x+1] == null)
         {
-            return { x: pos.x+1, y: pos.y };
+            return { x: pos.x+1, y: pos.y, direction: "right" };
         }
         if (pos.y > 0 && field [pos.y-1][pos.x] == null)
         {
-            return { x: pos.x, y: pos.y-1 };
+            return { x: pos.x, y: pos.y-1, direction: "up" };
         }
         if (pos.y+1 < field.length && field [pos.y+1][pos.x] == null)
         {
-            return { x: pos.x, y: pos.y+1 };
+            return { x: pos.x, y: pos.y+1, direction: "down" };
         }
         return null;
     }
-
 
     function onTileClick (tile, tileIndex)
     {
@@ -47,6 +46,8 @@ var puzzle = function () {
             if (newpos)
             {
                 showTileOnPos (tile, newpos.x, newpos.y );
+                tile.removeClass("moveleft moveright moveup movedown");
+                tile.addClass("move"+newpos.direction);
                 field[pos.y][pos.x] = null;
                 field[newpos.y][newpos.x] = tileIndex;
             }
