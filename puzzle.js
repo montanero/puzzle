@@ -1,7 +1,9 @@
 console.error("hallo");
 
 var puzzle = function () {
-    let  field = [[null,2,1],[0,3,4],[7,6,5]];
+    let  field = [[null,5,1],[8,3,4],[7,6,2]];
+
+    let url = "roland.jpg";
 
     function findTile (tileIndex)
     {
@@ -60,6 +62,11 @@ var puzzle = function () {
         tile.css("top", ""+(y*50)+"px") ;
     }
 
+    function getImageSegment (tileIdx)
+    {
+        return { x: tileIdx%3, y: Math.floor(tileIdx/3) }
+    }
+
     return {
 
         init: function ()
@@ -69,10 +76,15 @@ var puzzle = function () {
                 for (let x=0;x<field[y].length; x++)
                 {
                     let tileIdx = field[y][x];
-                    if (tileIdx >= 0)
+                    if (tileIdx != null)
                     {
                         let tile = $("#tile"+tileIdx);
                         showTileOnPos (tile, x, y);
+                        tile.css ("background-image", "url('"+url+"')");
+                        tile.css ("background-size", "150px auto");
+                        let seg = getImageSegment (tileIdx);
+                        tile.css ("background-position", "-"+(50*seg.x)+"px -"+(50*seg.y)+"px");
+                        
                         tile.click (function () { onTileClick (tile, tileIdx);});
                     }
                 }
