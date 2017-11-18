@@ -1,8 +1,7 @@
-console.error("hallo");
-
 var puzzle = function () {
-    let  field = [[null,5,1],[8,3,4],[7,6,2]];
-
+    let field = [[null,5,2,15],[8,1,4,14],[7,6,3,13],[12,11,10,9]];
+//    let field = [[1,null,2,3],[4,5,6,7],[8,9,10,11],[12,13,14,15]];
+    
     let url = "roland.jpg";
 
     function findTile (tileIndex)
@@ -54,6 +53,11 @@ var puzzle = function () {
                 field[newpos.y][newpos.x] = tileIndex;
             }
         }
+        if (isSolved())
+        {
+            field[0][0] = 0;
+            $("#tile0").show();
+        }
     }
 
     function showTileOnPos (tile, x, y)
@@ -62,15 +66,36 @@ var puzzle = function () {
         tile.css("top", ""+(y*50)+"px") ;
     }
 
-    function getImageSegment (tileIdx)
+    function paintTiles ()
     {
-        return { x: tileIdx%3, y: Math.floor(tileIdx/3) }
+        for (let tileIdx=0; tileIdx<16; tileIdx++)
+        {
+            let tile = $("#tile"+tileIdx);
+            let x = tileIdx%field.length;
+            let y = Math.floor(tileIdx/field.length);            
+            tile.css ("background-position", "-"+(50*x)+"px -"+(50*y)+"px");
+        }
+    }
+
+    function isSolved ()
+    {
+        for (let y=0;y<field.length; y++)
+        {
+            for (let x=0;x<field[y].length; x++)
+            {
+                if (field[y][x] != null && field[y][x] != y*field.length+x)
+                 return false;
+            }
+        }
+        return true;
     }
 
     return {
 
         init: function ()
         {
+            paintTiles ();
+            $("#tile0").hide();
             for (let y=0;y<field.length; y++)
             {
                 for (let x=0;x<field[y].length; x++)
@@ -79,12 +104,7 @@ var puzzle = function () {
                     if (tileIdx != null)
                     {
                         let tile = $("#tile"+tileIdx);
-                        showTileOnPos (tile, x, y);
-                        tile.css ("background-image", "url('"+url+"')");
-                        tile.css ("background-size", "150px auto");
-                        let seg = getImageSegment (tileIdx);
-                        tile.css ("background-position", "-"+(50*seg.x)+"px -"+(50*seg.y)+"px");
-                        
+                        showTileOnPos (tile, x, y);                       
                         tile.click (function () { onTileClick (tile, tileIdx);});
                     }
                 }

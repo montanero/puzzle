@@ -43,10 +43,13 @@
     padding: 0;
     margin:0;
     position: absolute;
+    background-image: url(roland.jpg);
+    background-size: 200px auto;
 }
 
 .outer {
-    border:  3px solid black ;;
+    border:  3px solid black ;
+    background-color: darkslategray;
     padding: 0;
     margin:0;
     width: 200px;
