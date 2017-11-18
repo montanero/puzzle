@@ -2,8 +2,9 @@ var puzzle = function () {
     let field = [[null,5,2,15],[8,1,4,14],[7,6,3,13],[12,11,10,9]];
 //    let field = [[1,null,2,3],[4,5,6,7],[8,9,10,11],[12,13,14,15]];
     
-    let url = "roland.jpg";
-
+    let  tileSize;
+    let fieldSize = field.length; 
+    
     function findTile (tileIndex)
     {
         for (let y=0;y<field.length; y++)
@@ -62,8 +63,8 @@ var puzzle = function () {
 
     function showTileOnPos (tile, x, y)
     {
-        tile.css("left", ""+(x*50)+"px"); 
-        tile.css("top", ""+(y*50)+"px") ;
+        tile.css("left", ""+(x*tileSize)+"px"); 
+        tile.css("top", ""+(y*tileSize)+"px") ;
     }
 
     function paintTiles ()
@@ -73,7 +74,7 @@ var puzzle = function () {
             let tile = $("#tile"+tileIdx);
             let x = tileIdx%field.length;
             let y = Math.floor(tileIdx/field.length);            
-            tile.css ("background-position", "-"+(50*x)+"px -"+(50*y)+"px");
+            tile.css ("background-position", "-"+(tileSize*x)+"px -"+(tileSize*y)+"px");
         }
     }
 
@@ -94,6 +95,7 @@ var puzzle = function () {
 
         init: function ()
         {
+            tileSize = $("#tile0").width();  
             paintTiles ();
             $("#tile0").hide();
             for (let y=0;y<field.length; y++)
