@@ -1,18 +1,16 @@
 var puzzle = function () {
-    let field = [[null,5,2,15],[8,1,4,14],[7,6,3,13],[12,11,10,9]];
-//    let field = [[1,null,2,3],[4,5,6,7],[8,9,10,11],[12,13,14,15]];
+    let field = [null,5,2,15,8,1,4,14,7,6,3,13,12,11,10,9];
     
     let  tileSize;
-    let fieldSize = field.length; 
+    let fieldSize = 4; 
     
     function findTile (tileIndex)
     {
-        for (let y=0;y<field.length; y++)
+        for (let i=0;i<field.length; i++)
         {
-            for (let x=0;x<field[y].length; x++)
+            if (field[i] === tileIndex)
             {
-                if (field[y][x] == tileIndex)
-                    return { "x": x, "y": y };
+                return i;
             }
         }
         return null;
@@ -20,21 +18,21 @@ var puzzle = function () {
 
     function freeSpaceNextTo (pos)
     {
-        if (pos.x > 0 && field [pos.y][pos.x-1] == null)
+        if (field[pos-1]===null)
         {
-            return { x: pos.x-1, y: pos.y, direction: "left" };
+            return { index: pos-1, direction: "left" };
         }
-        if (pos.x+1 < field[pos.y].length && field [pos.y][pos.x+1] == null)
+        if (field[pos+1]===null)
         {
-            return { x: pos.x+1, y: pos.y, direction: "right" };
+            return { index: pos+1, direction: "right" };
         }
-        if (pos.y > 0 && field [pos.y-1][pos.x] == null)
+        if (field[pos-fieldSize]===null)
         {
-            return { x: pos.x, y: pos.y-1, direction: "up" };
+            return { index: pos-fieldSize, direction: "up" };
         }
-        if (pos.y+1 < field.length && field [pos.y+1][pos.x] == null)
+        if (field[pos+fieldSize]===null)
         {
-            return { x: pos.x, y: pos.y+1, direction: "down" };
+            return { index: pos+fieldSize, direction: "down" };
         }
         return null;
     }
@@ -42,27 +40,29 @@ var puzzle = function () {
     function onTileClick (tile, tileIndex)
     {
         let pos = findTile (tileIndex);
-        if (pos)
+        if (pos !== null)
         {
             let newpos = freeSpaceNextTo (pos);
             if (newpos)
             {
-                showTileOnPos (tile, newpos.x, newpos.y );
+                showTileOnPos (tile, newpos.index);
                 tile.removeClass("moveleft moveright moveup movedown");
                 tile.addClass("move"+newpos.direction);
-                field[pos.y][pos.x] = null;
-                field[newpos.y][newpos.x] = tileIndex;
+                field[pos] = null;
+                field[newpos.index] = tileIndex;
             }
         }
         if (isSolved())
         {
-            field[0][0] = 0;
+            field[0] = 0;
             $("#tile0").show();
         }
     }
 
-    function showTileOnPos (tile, x, y)
+    function showTileOnPos (tile, index)
     {
+        let x = index % fieldSize;
+        let y = Math.floor (index / fieldSize);
         tile.css("left", ""+(x*tileSize)+"px"); 
         tile.css("top", ""+(y*tileSize)+"px") ;
     }
@@ -72,20 +72,19 @@ var puzzle = function () {
         for (let tileIdx=0; tileIdx<16; tileIdx++)
         {
             let tile = $("#tile"+tileIdx);
-            let x = tileIdx%field.length;
-            let y = Math.floor(tileIdx/field.length);            
+            let x = tileIdx%fieldSize;
+            let y = Math.floor(tileIdx/fieldSize);            
             tile.css ("background-position", "-"+(tileSize*x)+"px -"+(tileSize*y)+"px");
         }
     }
 
     function isSolved ()
     {
-        for (let y=0;y<field.length; y++)
+        for (let index=1;index<field.length; index++)
         {
-            for (let x=0;x<field[y].length; x++)
+            if (field [index] !== index)
             {
-                if (field[y][x] != null && field[y][x] != y*field.length+x)
-                 return false;
+                return false;
             }
         }
         return true;
@@ -98,20 +97,18 @@ var puzzle = function () {
             tileSize = $("#tile0").width();  
             paintTiles ();
             $("#tile0").hide();
-            for (let y=0;y<field.length; y++)
-            {
-                for (let x=0;x<field[y].length; x++)
+            for (let index=1;index<field.length; index++)
                 {
-                    let tileIdx = field[y][x];
+                    let tileIdx = field[index];
                     if (tileIdx != null)
                     {
                         let tile = $("#tile"+tileIdx);
-                        showTileOnPos (tile, x, y);                       
+                        showTileOnPos (tile, index);                       
                         tile.click (function () { onTileClick (tile, tileIdx);});
                     }
                 }
                 
-            }
+            
         }
     };
 } ();
