@@ -1,12 +1,56 @@
 var puzzle = function () {
-    let field = [null,5,2,15,8,1,4,14,7,6,3,13,12,11,10,9];
+    let TILESIZE;
+    let NCOLUMNS = 4; 
+    let NFIELDS = NCOLUMNS*NCOLUMNS; 
+
+    let field = randomizeField(); 
+    //[null,5,2,15,8,1,4,14,7,6,3,13,12,11,10,9];
     
-    let tileSize;
-    let numberColumns = 4; 
-    
+    function randomizeField ()
+    {
+        while (true)
+        {
+            let f = [null];
+            let indexes = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+            while (indexes.length > 0)
+            {
+                let i = Math.floor(Math.random() * indexes.length) ;
+                f.push (indexes[i]);
+                indexes.splice (i,1);
+            }
+            if (isSolvable (f))
+                return f;
+        }
+    }
+
+    // Algorithmus nach https://de.wikipedia.org/wiki/15-Puzzle
+    function isSolvable (f)
+    {
+        let nullIndex = f.findIndex (function (e) { return e === null });
+        if (nullIndex < 0)
+            return false;
+        let n1 = 1+Math.floor(nullIndex / NCOLUMNS);
+        let x = f.slice(0); // shallow copy
+        x.splice(nullIndex, 1);
+        let n2 = 0;
+        for (let i=1; i<x.length; i++)
+        {
+            for (let j=0; j<i; j++)
+            {
+                if (x[j]> x[i])
+                    n2 ++;
+            }
+        }
+
+        return (n1+n2)%2 == 1;
+        
+    }
+
+
+
     function findTile (tileIndex)
     {
-        for (let i=0;i<field.length; i++)
+        for (let i=0;i<NFIELDS; i++)
         {
             if (field[i] === tileIndex)
             {
@@ -26,13 +70,13 @@ var puzzle = function () {
         {
             return { index: pos+1, direction: "right" };
         }
-        if (field[pos-numberColumns]===null)
+        if (field[pos-NCOLUMNS]===null)
         {
-            return { index: pos-numberColumns, direction: "up" };
+            return { index: pos-NCOLUMNS, direction: "up" };
         }
-        if (field[pos+numberColumns]===null)
+        if (field[pos+NCOLUMNS]===null)
         {
-            return { index: pos+numberColumns, direction: "down" };
+            return { index: pos+NCOLUMNS, direction: "down" };
         }
         return null;
     }
@@ -61,26 +105,26 @@ var puzzle = function () {
 
     function showTileOnPos (tile, index)
     {
-        let x = index % numberColumns;
-        let y = Math.floor (index / numberColumns);
-        tile.css("left", ""+(x*tileSize)+"px"); 
-        tile.css("top", ""+(y*tileSize)+"px") ;
+        let x = index % NCOLUMNS;
+        let y = Math.floor (index / NCOLUMNS);
+        tile.css("left", ""+(x*TILESIZE)+"px"); 
+        tile.css("top", ""+(y*TILESIZE)+"px") ;
     }
 
     function paintTiles ()
     {
-        for (let tileIdx=0; tileIdx<16; tileIdx++)
+        for (let tileIdx=0; tileIdx<NFIELDS; tileIdx++)
         {
             let tile = $("#tile"+tileIdx);
-            let x = tileIdx%numberColumns;
-            let y = Math.floor(tileIdx/numberColumns);            
-            tile.css ("background-position", "-"+(tileSize*x)+"px -"+(tileSize*y)+"px");
+            let x = tileIdx%NCOLUMNS;
+            let y = Math.floor(tileIdx/NCOLUMNS);            
+            tile.css ("background-position", "-"+(TILESIZE*x)+"px -"+(TILESIZE*y)+"px");
         }
     }
 
     function isSolved ()
     {
-        for (let index=1;index<field.length; index++)
+        for (let index=1;index<NFIELDS; index++)
         {
             if (field [index] !== index)
             {
@@ -94,10 +138,10 @@ var puzzle = function () {
 
         init: function ()
         {
-            tileSize = $("#tile0").width();  
+            TILESIZE = $("#tile0").width();  
             paintTiles ();
             $("#tile0").hide();
-            for (let index=1;index<field.length; index++)
+            for (let index=1;index<NFIELDS; index++)
                 {
                     let tileIdx = field[index];
                     if (tileIdx != null)
