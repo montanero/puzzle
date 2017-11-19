@@ -1,8 +1,8 @@
 var puzzle = function () {
     let field = [null,5,2,15,8,1,4,14,7,6,3,13,12,11,10,9];
     
-    let  tileSize;
-    let fieldSize = 4; 
+    let tileSize;
+    let numberColumns = 4; 
     
     function findTile (tileIndex)
     {
@@ -26,13 +26,13 @@ var puzzle = function () {
         {
             return { index: pos+1, direction: "right" };
         }
-        if (field[pos-fieldSize]===null)
+        if (field[pos-numberColumns]===null)
         {
-            return { index: pos-fieldSize, direction: "up" };
+            return { index: pos-numberColumns, direction: "up" };
         }
-        if (field[pos+fieldSize]===null)
+        if (field[pos+numberColumns]===null)
         {
-            return { index: pos+fieldSize, direction: "down" };
+            return { index: pos+numberColumns, direction: "down" };
         }
         return null;
     }
@@ -43,7 +43,7 @@ var puzzle = function () {
         if (pos !== null)
         {
             let newpos = freeSpaceNextTo (pos);
-            if (newpos)
+            if (newpos !== null)
             {
                 showTileOnPos (tile, newpos.index);
                 tile.removeClass("moveleft moveright moveup movedown");
@@ -61,8 +61,8 @@ var puzzle = function () {
 
     function showTileOnPos (tile, index)
     {
-        let x = index % fieldSize;
-        let y = Math.floor (index / fieldSize);
+        let x = index % numberColumns;
+        let y = Math.floor (index / numberColumns);
         tile.css("left", ""+(x*tileSize)+"px"); 
         tile.css("top", ""+(y*tileSize)+"px") ;
     }
@@ -72,8 +72,8 @@ var puzzle = function () {
         for (let tileIdx=0; tileIdx<16; tileIdx++)
         {
             let tile = $("#tile"+tileIdx);
-            let x = tileIdx%fieldSize;
-            let y = Math.floor(tileIdx/fieldSize);            
+            let x = tileIdx%numberColumns;
+            let y = Math.floor(tileIdx/numberColumns);            
             tile.css ("background-position", "-"+(tileSize*x)+"px -"+(tileSize*y)+"px");
         }
     }
