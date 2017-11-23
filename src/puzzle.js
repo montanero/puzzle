@@ -1,3 +1,6 @@
+import $ from 'jquery';
+import './puzzle.css';
+
 var puzzle = function () {
     let TILESIZE;
     let NCOLUMNS = 4; 

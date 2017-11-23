@@ -1,0 +1,31 @@
+{
+  "name": "puzzle",
+  "version": "1.0.0",
+  "description": "Mein erster Versuch",
+  "main": "puzzle.js",
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "require": "^2.4.20"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.5",
+    "gulp": "^3.9.1",
+    "html-webpack-plugin": "^2.30.1",
+    "style-loader": "^0.19.0",
+    "webpack": "^3.8.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/montanero/puzzle.git"
+  },
+  "author": "Orlando Montanero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/montanero/puzzle/issues"
+  },
+  "homepage": "https://github.com/montanero/puzzle#readme"
+}
