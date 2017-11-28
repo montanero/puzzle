@@ -85,6 +85,7 @@ var puzzle = function () {
     }
 
     function onTileClick(tile, tileIndex) {
+        changeImage();
         let pos = findTile(tileIndex);
         if (pos !== null) {
             let newpos = freeSpaceNextTo(pos);
@@ -115,6 +116,14 @@ var puzzle = function () {
             let x = tileIdx % NCOLUMNS;
             let y = Math.floor(tileIdx / NCOLUMNS);
             tile.css("background-position", "-" + (TILESIZE * x) + "px -" + (TILESIZE * y) + "px");
+        }
+    }
+
+
+    function changeImage() {
+        for (let tileIdx = 0; tileIdx < NFIELDS; tileIdx++) {
+            let tile = $("#tile" + tileIdx);
+            tile.toggleClass("alternateImage");
         }
     }
 

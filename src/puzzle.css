@@ -1,21 +1,47 @@
-
 @keyframes moveleft {
-    from { transform: translate3d(2cm, 0, 0);}
-    to { transform: translate3d(0, 0, 0);}
-}
-@keyframes moveright {
-    from { transform: translate3d(-2cm, 0, 0);}
-    to { transform: translate3d(0, 0, 0);}
-}
-@keyframes movedown {
-    from { transform: translate3d(0, -2cm, 0);}
-    to { transform: translate3d(0, 0, 0);}
-}
-@keyframes moveup {
-    from { transform: translate3d(0, 2cm, 0);}
-    to { transform: translate3d(0, 0, 0);}
+    from {
+        transform: translate3d(2cm, 0, 0);
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
 }
 
+@keyframes moveright {
+    from {
+        transform: translate3d(-2cm, 0, 0);
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes movedown {
+    from {
+        transform: translate3d(0, -2cm, 0);
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes moveup {
+    from {
+        transform: translate3d(0, 2cm, 0);
+    }
+    to {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+@keyframes changeimg {
+    from {
+        background-image: url(roland.jpg);
+    }
+    to {
+        background-image: url(antonia.jpg);
+    }
+}
 
 .moveleft {
     animation-name: moveleft;
@@ -36,23 +62,28 @@
     animation-name: movedown;
     animation-duration: 0.5s;
 }
-                        
+
 .tile {
     width: 2cm;
     height: 2cm;
     padding: 0;
-    margin:0;
+    margin: 0;
     position: absolute;
     background-image: url(roland.jpg);
     background-size: 8cm auto;
 }
 
 .outer {
-    border:  3px solid black ;
+    border: 3px solid black;
     background-color: lightgreen;
     padding: 0;
-    margin:0;
+    margin: 0;
     width: 8cm;
     height: 8cm;
     position: relative;
 }
+
+.alternateImage {
+    background-image: url(antonia.jpg);
+}
+
