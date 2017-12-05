@@ -42,10 +42,7 @@ var puzzle = function () {
         }
 
         return (n1 + n2) % 2 == 1;
-
     }
-
-
 
     function findTile(tileIndex) {
         for (let i = 0; i < NFIELDS; i++) {
@@ -119,7 +116,6 @@ var puzzle = function () {
         }
     }
 
-
     function changeImage() {
         for (let tileIdx = 0; tileIdx < NFIELDS; tileIdx++) {
             let tile = $("#tile" + tileIdx);
@@ -137,7 +133,6 @@ var puzzle = function () {
     }
 
     return {
-
         init: function () {
             TILESIZE = $("#tile0").width();
             paintTiles();
