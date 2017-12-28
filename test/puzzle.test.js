@@ -133,4 +133,20 @@ describe('Puzzle', function () {
             assert.isTrue(solved)
         })
     });
+
+    describe('#showTileOnPos()', function () {
+
+        let puzzle;
+
+        beforeEach(function () {
+            puzzle = new Puzzle();
+            sinon.spy(puzzle, "showTileOnPos")
+        });
+
+        it('is called on move', function () {
+            puzzle.init([null, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+            puzzle.moveTile(1);
+            puzzle.showTileOnPos.should.have.been.calledOnce
+        });
+    })
 });
