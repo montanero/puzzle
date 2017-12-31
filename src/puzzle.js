@@ -40,9 +40,9 @@ var Puzzle = function () {
     function _checkField(f) {
         if (f.length !== NFIELDS)
             throw ("field has wrong length");
-        for (let i = 1; i < NFIELDS; i++) {
-            if (!f.includes(i))
-                throw ("array is incomplete, value " + i + " is missing");
+        for (let position = 1; position < NFIELDS; position++) {
+            if (!f.includes(position))
+                throw ("array is incomplete, value " + position + " is missing");
         }
         if (!f.includes(null))
             throw ("array must have null field");
@@ -72,65 +72,65 @@ var Puzzle = function () {
         return (n1 + n2) % 2 == 1;
     }
 
-    function _findTile(tileIndex) {
-        for (let i = 0; i < NFIELDS; i++) {
-            if (this.field[i] === tileIndex) {
-                return i;
+    function _findTile(tileNumber) {
+        for (let position = 0; position < NFIELDS; position++) {
+            if (this.field[position] === tileNumber) {
+                return position;
             }
         }
         return null;
     }
 
-    function _freeSpaceNextTo(pos) {
-        if (this.field[pos - 1] === null && pos % NCOLUMNS > 0) {
+    function _freeSpaceNextTo(position) {
+        if (this.field[position - 1] === null && position % NCOLUMNS > 0) {
             return {
-                index: pos - 1,
+                position: position - 1,
                 direction: "left"
             };
         }
-        if (this.field[pos + 1] === null && pos % NCOLUMNS < NCOLUMNS - 1) {
+        if (this.field[position + 1] === null && position % NCOLUMNS < NCOLUMNS - 1) {
             return {
-                index: pos + 1,
+                position: position + 1,
                 direction: "right"
             };
         }
-        if (this.field[pos - NCOLUMNS] === null) {
+        if (this.field[position - NCOLUMNS] === null) {
             return {
-                index: pos - NCOLUMNS,
+                position: position - NCOLUMNS,
                 direction: "up"
             };
         }
-        if (this.field[pos + NCOLUMNS] === null) {
+        if (this.field[position + NCOLUMNS] === null) {
             return {
-                index: pos + NCOLUMNS,
+                position: position + NCOLUMNS,
                 direction: "down"
             };
         }
         return null;
     }
 
-    function _moveTile(tileIndex) {
-        let pos = _findTile.call(this, tileIndex);
-        if (pos !== null) {
-            let newpos = _freeSpaceNextTo.call(this, pos);
+    function _moveTile(tileNumber) {
+        let position = _findTile.call(this, tileNumber);
+        if (position !== null) {
+            let newpos = _freeSpaceNextTo.call(this, position);
             if (newpos !== null) {
-                this.showTileOnPos(tileIndex, newpos.index, newpos.direction);
-                this.field[pos] = null;
-                this.field[newpos.index] = tileIndex;
+                this.showTileOnPos(tileNumber, newpos.position, newpos.direction);
+                this.field[position] = null;
+                this.field[newpos.position] = tileNumber;
             }
         }
     }
 
     function _isSolved() {
-        for (let index = 1; index < NFIELDS; index++) {
-            if (this.field[index] !== index) {
+        for (let position = 1; position < NFIELDS; position++) {
+            if (this.field[position] !== position) {
                 return false;
             }
         }
         return true;
     }
 
-    function _showTileOnPos(tileIndex, posIndex, direction) {
+    function _showTileOnPos(tileNumber, position, direction) {
 
     }
 
