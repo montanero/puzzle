@@ -35,6 +35,9 @@ var Puzzle = function () {
         }
 
         this.field = f;
+        for (let i = 0; i < this.field.length; i++) {
+            this.initTile(this.field[i], i)
+        }
     }
 
     function _checkField(f) {
@@ -134,12 +137,16 @@ var Puzzle = function () {
 
     }
 
+    function _initTile(tileNumber, position) {
+    }
+
 
     Puzzle.prototype.isSolved = _isSolved;
     Puzzle.prototype.init = _init
     Puzzle.prototype.getField = _getField
     Puzzle.prototype.moveTile = _moveTile
     Puzzle.prototype.showTileOnPos = _showTileOnPos
+    Puzzle.prototype.initTile = _initTile
 
     return Puzzle;
 }();
