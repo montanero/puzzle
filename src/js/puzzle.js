@@ -1,5 +1,5 @@
-var Puzzle = function () {
-    "use strict";
+
+"use strict";
     let NCOLUMNS = 4;
     let NFIELDS = NCOLUMNS * NCOLUMNS;
 
@@ -148,5 +148,5 @@ var Puzzle = function () {
     Puzzle.prototype.showTileOnPos = _showTileOnPos
     Puzzle.prototype.initTile = _initTile
 
-    return Puzzle;
-}();
+    module.exports = Puzzle;
+

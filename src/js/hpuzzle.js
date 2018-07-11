@@ -1,3 +1,5 @@
+let Puzzle = require ("./puzzle")
+let $ = require ("jquery")
 
 let p = new Puzzle ();
 
@@ -35,9 +37,6 @@ function setTileBackground (tile, tileNumber)
     let backgroundY = Math.floor(tileNumber / NCOLUMNS);
     tile.css("background-position", "-" + (TILESIZE * backgroundX) + "px -" + (TILESIZE * backgroundY) + "px");
 }
-
-
-
 
 function onTileClick(tile, tileNumber) {
     p.moveTile (tileNumber)

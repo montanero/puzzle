@@ -36,10 +36,10 @@
 
 @keyframes changeimg {
     from {
-        background-image: url(roland.jpg);
+        background-image: url(../img/roland.jpg);
     }
     to {
-        background-image: url(antonia.jpg);
+        background-image: url(../img/antonia.jpg);
     }
 }
 
@@ -69,7 +69,7 @@
     padding: 0;
     margin: 0;
     position: absolute;
-    background-image: url(roland.jpg);
+    background-image: url(../img/roland.jpg);
     background-size: 8cm auto;
 }
 

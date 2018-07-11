@@ -1,3 +1,6 @@
+define(['puzzle'], function(Puzzle) {
+
+
 describe('Puzzle', function () {
 
     describe('#init()', function () {
@@ -149,4 +152,5 @@ describe('Puzzle', function () {
             puzzle.showTileOnPos.should.have.been.calledOnce
         });
     })
+});
 });

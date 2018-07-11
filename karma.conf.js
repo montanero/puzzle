@@ -10,31 +10,38 @@ module.exports = function (config) {
 
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: ['mocha', 'sinon-chai'],
+        frameworks: ['mocha', 'sinon-chai', 'browserify' ],
 
 
         // list of files / patterns to load in the browser
-        files: [
-            'src/*.js',
-            'test/*.js'
-        ],
-
+	files : [
+	    'src/js/*.js',
+	    'test/*.test.js'
+	],
 
         // list of files to exclude
-        exclude: [],
+        exclude: [
+	    "**/main.js",
+	    "**/bundle.js"
+	],
 
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
-            "src/**/*.js": ["babel"],
-            "test/**/*.js": ["babel"]
+            "src/js/**/*.js": ["babel", "browserify"],
+            "test/**/*.js": ["babel", "browserify"]
         },
 
         "babelPreprocessor": {
             // options go here
         },
 
+	browserify: {
+	    debug: true,
+	    transform: [ ]
+	},
+	
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
@@ -51,7 +58,7 @@ module.exports = function (config) {
 
         // level of logging
         // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-        logLevel: config.LOG_INFO,
+        logLevel: config.LOG_DEBUG,
 
 
         // enable / disable watching file and executing tests whenever any file changes
@@ -65,7 +72,7 @@ module.exports = function (config) {
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
-        singleRun: false,
+        singleRun: true,
 
         // Concurrency level
         // how many browser should be started simultaneous
