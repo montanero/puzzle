@@ -1,5 +1,4 @@
-define(['puzzle'], function(Puzzle) {
-
+let Puzzle = require ("../src/js/puzzle")
 
 describe('Puzzle', function () {
 
@@ -152,5 +151,4 @@ describe('Puzzle', function () {
             puzzle.showTileOnPos.should.have.been.calledOnce
         });
     })
-});
 });
