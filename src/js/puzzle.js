@@ -32,7 +32,7 @@ function _init(f) {
     }
 
     this.field = f;
-    for (let i = 0; i < this.field.length; i++) {
+    for (let i = 1; i < this.field.length; i++) {
         this.initTile(this.field[i], i)
     }
 }

@@ -18,7 +18,8 @@ p.showTileOnPos =function (tileNumber, position, direction)
 
 p.initTile = function (tileNumber, position)
 {
-    let tile = $("#tile"+tileNumber)
+    let outer = $("#outer");
+    let tile = createTile(outer, tileNumber)
     setTilePosition(tile, position)
     setTileBackground (tile, tileNumber)
     tile.click(function () {
@@ -44,8 +45,20 @@ function onTileClick(tile, tileNumber) {
     p.moveTile (tileNumber)
 }
 
+function createTile (outer, tileNumber)
+{
+    let tile = $('<div/>', {
+        id: 'tile'+tileNumber,
+        class: 'tile'
+    })
+    tile.appendTo(outer);
+    return tile
+}
+
+
 function init () {
-    let tile0 = $("#tile0");
+    let outer = $("#outer");
+    let tile0 = createTile(outer, 0)
     TILESIZE = tile0.width();
     setTileBackground(tile0, 0)
     tile0.hide();
