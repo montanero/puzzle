@@ -3,10 +3,10 @@
 let Puzzle = require ("./puzzle")
 let $ = require ("jquery")
 
-let p = new Puzzle ();
 
 let NCOLUMNS=4
 let TILESIZE= 0
+let p = new Puzzle (NCOLUMNS);
 
 p.showTileOnPos =function (tileNumber, position, direction)
 {

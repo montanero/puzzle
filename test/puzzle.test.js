@@ -7,7 +7,7 @@ describe('Puzzle', function () {
         let puzzle;
 
         beforeEach(function () {
-            puzzle = new Puzzle();
+            puzzle = new Puzzle(4);
         })
 
 
@@ -32,7 +32,7 @@ describe('Puzzle', function () {
         let puzzle;
 
         beforeEach(function () {
-            puzzle = new Puzzle();
+            puzzle = new Puzzle(4);
         })
 
         it('call works', function () {
@@ -70,7 +70,7 @@ describe('Puzzle', function () {
         let puzzle;
 
         beforeEach(function () {
-            puzzle = new Puzzle();
+            puzzle = new Puzzle(4);
         });
 
         it('moves tile to the left', function () {
@@ -120,7 +120,7 @@ describe('Puzzle', function () {
         let puzzle;
 
         beforeEach(function () {
-            puzzle = new Puzzle();
+            puzzle = new Puzzle(4);
         });
 
         it('returns false', function () {
@@ -141,7 +141,7 @@ describe('Puzzle', function () {
         let puzzle;
 
         beforeEach(function () {
-            puzzle = new Puzzle();
+            puzzle = new Puzzle(4);
             sinon.spy(puzzle, "showTileOnPos")
         });
 
