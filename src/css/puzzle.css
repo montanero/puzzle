@@ -34,15 +34,6 @@
     }
 }
 
-@keyframes changeimg {
-    from {
-        background-image: url(../img/roland.jpg);
-    }
-    to {
-        background-image: url(../img/antonia.jpg);
-    }
-}
-
 .moveleft {
     animation-name: moveleft;
     animation-duration: 0.5s;
@@ -81,9 +72,5 @@
     width: 8cm;
     height: 8cm;
     position: relative;
-}
-
-.alternateImage {
-    background-image: url(antonia.jpg);
 }
 

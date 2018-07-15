@@ -10365,6 +10365,8 @@ return jQuery;
 } );
 
 },{}],2:[function(require,module,exports){
+"use strict";
+
 let Puzzle = require ("./puzzle")
 let $ = require ("jquery")
 
@@ -10425,15 +10427,12 @@ $(document).ready(function () {
 let hpuzzle = require("./hpuzzle.js")
 
 },{"./hpuzzle.js":2}],4:[function(require,module,exports){
-
 "use strict";
     let NCOLUMNS = 4;
     let NFIELDS = NCOLUMNS * NCOLUMNS;
 
     function Puzzle() {
-
         this.field = [];
-        //[null,5,2,15,8,1,4,14,7,6,3,13,12,11,10,9];
     }
 
     function _getField() {
@@ -10575,7 +10574,7 @@ let hpuzzle = require("./hpuzzle.js")
     Puzzle.prototype.showTileOnPos = _showTileOnPos
     Puzzle.prototype.initTile = _initTile
 
-    module.exports = Puzzle;
+module.exports = Puzzle;
 
 
 },{}]},{},[3]);

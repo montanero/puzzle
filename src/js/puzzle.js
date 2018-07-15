@@ -1,12 +1,9 @@
-
 "use strict";
     let NCOLUMNS = 4;
     let NFIELDS = NCOLUMNS * NCOLUMNS;
 
     function Puzzle() {
-
         this.field = [];
-        //[null,5,2,15,8,1,4,14,7,6,3,13,12,11,10,9];
     }
 
     function _getField() {
@@ -148,5 +145,5 @@
     Puzzle.prototype.showTileOnPos = _showTileOnPos
     Puzzle.prototype.initTile = _initTile
 
-    module.exports = Puzzle;
+module.exports = Puzzle;
 

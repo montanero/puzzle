@@ -1,3 +1,5 @@
+"use strict";
+
 let Puzzle = require ("./puzzle")
 let $ = require ("jquery")
 
